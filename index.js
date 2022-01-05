@@ -5,19 +5,19 @@ var testingArea = document.getElementById('testing_area').getContext('2d');
 testingArea.previousTouch = null;
 var testingArguments = {
     size: Math.round(Math.min(screen.width, screen.height) * window.devicePixelRatio / 2),
-    gap: 0,
-    angle: 0
+    gap: 0
 };
 var params = {
     pixelSize: document.getElementById('pixel_size'),
     gapSize: document.getElementById('gap_size'),
+    axis: document.getElementById('axis'),
     viewingDistance: document.getElementById('viewing_distance'),
     vertexDistance: document.getElementById('vertex_distance')
 };
 params.pixelSize.delayTimeout = undefined;
 params.pixelSize.value = 250;
-params.gapSize.delayTimeout = undefined;
 params.gapSize.value = 3;
+params.axis.value = 90;
 params.viewingDistance.value = 30;
 params.vertexDistance.value = 1.5;
 params.getValue = function(element) {
@@ -52,18 +52,26 @@ function drawTestingArea(ctx, args) {
     //Background
     ctx.fillStyle = '#000000';
     ctx.fillRect(0, 0, width, height);
+    //Apply axis
+    const angle = 90.0 - params.getValue('axis').value;
+    ctx.imageSmoothingEnabled = angle > -270;
+    ctx.save();
+    ctx.translate(width / 2, height / 2);
+    ctx.rotate(Math.PI * angle / 180.0);
+    ctx.translate(-width / 2, -height / 2);
+    //Green line (static)
+    const baseline = Math.floor(height / 2);
+    ctx.fillStyle = '#00FF00';
+    ctx.fillRect(-width, baseline, width * 3, 1);
+    //Red line (moving)
+    ctx.fillStyle = '#FF0000';
+    ctx.fillRect(-width, baseline - args.gap, width * 3, 1);
     //Stats
+    ctx.restore();
     const pixelSize = params.getValue('pixelSize').value / 1000;
     ctx.fillStyle = '#FFFFFF';
     ctx.font = '0.5em sans-serif';
     ctx.fillText(args.gap + 'px ≙ ' + (args.gap * pixelSize).toFixed(3) + 'mm', 3, args.size - 4);
-    //Green line (static)
-    const baseline = Math.floor(height / 2);
-    ctx.fillStyle = '#00FF00';
-    ctx.fillRect(0, baseline, width, 1);
-    //Red line (moving)
-    ctx.fillStyle = '#FF0000';
-    ctx.fillRect(0, baseline - args.gap, width, 1);
 }
 
 function moveLine(delta) {
@@ -96,17 +104,15 @@ function applyParamChange() {
 
 function onChangePixelSize(delta) {
     if (typeof delta !== 'undefined') { //Immediately visualize changes when using + and - buttons
-        params.pixelSize.value = Number(params.pixelSize.value) + delta;
-        applyParamChange();
+        const pixelSize = params.getValue('pixelSize');
+        if (pixelSize.isValid) {
+            params.pixelSize.value = pixelSize.value + delta;
+            applyParamChange();
+        }
     } else { //Only apply changes 1 second after having finished typing
         clearTimeout(params.pixelSize.delayTimeout);
         params.pixelSize.delayTimeout = setTimeout(applyParamChange, PARAM_APPLY_DELAY_MS);
     }
-}
-
-function onChangeGapSize() {
-    clearTimeout(params.gapSize.delayTimeout);
-    params.gapSize.delayTimeout = setTimeout(applyParamChange, PARAM_APPLY_DELAY_MS);
 }
 
 testingArea.canvas.addEventListener('wheel', event => {

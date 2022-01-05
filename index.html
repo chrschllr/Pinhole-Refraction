@@ -18,7 +18,11 @@
             </div>
             <div class="parameter">
                 <label>Gap size [mm]:</label>
-                <input id="gap_size" oninput="onChangeGapSize()" pattern="^\d*\.?\d+$"></input>
+                <input id="gap_size" oninput="applyParamChange()" pattern="^\d*\.?\d+$"></input>
+            </div>
+            <div class="parameter">
+                <label>Axis [°]:</label>
+                <input id="axis" oninput="applyParamChange()" pattern="^\d*\.?\d+$"></input>
             </div>
             <div class="parameter">
                 <label>Viewing distance [cm]:</label>
