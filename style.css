@@ -1,0 +1,128 @@
+* {
+    font-family: Metropolis;
+    font-size: 10mm;
+    color: white;
+}
+
+label {
+    margin: auto;
+    margin-right: 0.5em;
+    float: left;
+}
+
+div {
+    margin: 0px;
+    display: flex;
+}
+
+body {
+    background-color: #1A1A20;
+    display: flex;
+    flex-direction: column;
+    margin: 0.4em;
+}
+
+canvas {
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    border: 2px solid white;
+    margin: auto;
+    margin-top: 0.2em;
+    margin-bottom: 0.2em;
+    transition: all 0.5s ease;
+}
+
+button {
+    font-weight: bold;
+    color: white;
+    background-color: #122EE2;
+    border: none;
+    border-radius: 0.5em;
+    height: 1.75em;
+    float: right;
+    touch-action: manipulation;
+}
+
+input {
+    color: white;
+    border: none;
+    border-radius: 0.5em;
+    padding: 0.4em;
+    box-sizing: border-box;
+    height: 1.75em;
+    background-color: #25252D;
+    width: 0%;
+    touch-action: manipulation;
+}
+
+@keyframes invalid-flash {
+    from {
+        outline: 0em solid transparent;
+    }
+    to {
+        outline: 0.175em solid #FFD04F;
+    }
+}
+
+input:invalid {
+    outline: 0.175em solid #FFD04F;
+    animation-name: invalid-flash;
+    animation-duration: 0.2s;
+}
+
+.main-layout {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.parameter {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 0.2em;
+    margin-bottom: 0.2em;
+}
+
+.parameter > input {
+    flex: 1;
+}
+
+.input-label {
+    margin-right: 0.4em;
+}
+
+.size-up {
+    background-color: #00C475;
+    margin-left: 0.4em;
+    width: 4em;
+}
+
+.size-down {
+    background-color: #E23B51;
+    margin-left: 0.4em;
+    width: 4em;
+}
+
+.slider {
+    height: auto;
+    width: 1em;
+    margin-top: 0.4em;
+    margin-bottom: 0.4em;
+    background: transparent;
+}
+
+.output {
+    margin-top: 2.15em;
+}
+
+.output > * {
+    font-weight: bold;
+}
+
+.output > input {
+    outline: 0.175em solid #122EE2;
+}
+
+.no-scroll {
+    overflow: hidden;
+}

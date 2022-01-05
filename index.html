@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Pinhole Refraction</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="user-scalable=no">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xz/fonts@1/serve/metropolis.min.css">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="main-layout">
+            <canvas id="testing_area" onmouseenter="setSiteScrollable(false)" onmouseleave="setSiteScrollable(true)"></canvas>
+            <div class="parameter">
+                <label>Pixel size [um]:</label>
+                <input id="pixel_size" oninput="onChangePixelSize()" pattern="^\d*\.?\d+$"></input>
+                <button class="size-up" onclick="onChangePixelSize(1)">+</button>
+                <button class="size-down" onclick="onChangePixelSize(-1)">-</button>
+            </div>
+            <div class="parameter">
+                <label>Gap size [mm]:</label>
+                <input id="gap_size" oninput="onChangeGapSize()" pattern="^\d*\.?\d+$"></input>
+            </div>
+            <div class="parameter">
+                <label>Viewing distance [cm]:</label>
+                <input id="viewing_distance" oninput="calculatePower()" pattern="^\d*\.?\d+$"></input>
+            </div>
+            <div class="parameter">
+                <label>Vertex distance [cm]:</label>
+                <input id="vertex_distance" oninput="calculatePower()" pattern="^\d*\.?\d+$"></input>
+            </div>
+            <div class="parameter output">
+                <label>Power (SPH) [D]:</label>
+                <input id="power" disabled></input>
+            </div>
+        </div>
+    </body>
+    <script type="text/javascript" src="index.js"></script>
+</html>
+
+<input type="range" orient="vertical" id="move_1" class="slider" style="visibility: hidden; display: none" oninput="onMoveLine(1)"></input>
