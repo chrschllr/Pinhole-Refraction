@@ -38,7 +38,7 @@ function calculatePower() {
     const gapDelta = gapRadius - testingArguments.gap / 2.0 * pixelSize;
     const viewingDistance = params.getValue('viewingDistance').value / 100.0;
     const vertexDistance = params.getValue('vertexDistance').value / 100.0;
-    const power = 1.0 / (gapRadius * viewingDistance / gapDelta + vertexDistance);
+    const power = 1.0 / (viewingDistance * gapRadius / gapDelta + vertexDistance);
     outputs.power.value = power.toFixed(3);
 }
 
