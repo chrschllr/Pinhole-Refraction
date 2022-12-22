@@ -60,11 +60,11 @@ function drawTestingArea(ctx, args) {
     ctx.translate(width / 2, height / 2);
     ctx.rotate(Math.PI * angle / 180.0);
     ctx.translate(-width / 2, -height / 2);
-    //Green line (static)
+    //Static line
     const baseline = Math.floor(height / 2);
     ctx.fillStyle = LINE_COLORS[0];
     ctx.fillRect(-width, baseline, width * 3, 1);
-    //Red line (moving)
+    //Moving line
     ctx.fillStyle = LINE_COLORS[1];
     ctx.fillRect(-width, baseline - args.gap, width * 3, 1);
     //Stats
