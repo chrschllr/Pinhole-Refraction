@@ -1,5 +1,6 @@
 const CREDIT_CARD_MM = 53.975;
 const PARAM_APPLY_DELAY_MS = 1000;
+const LINE_COLORS = ['#00FF000', '#FF0000'];
 
 var testingArea = document.getElementById('testing_area').getContext('2d');
 testingArea.previousTouch = null;
@@ -61,10 +62,10 @@ function drawTestingArea(ctx, args) {
     ctx.translate(-width / 2, -height / 2);
     //Green line (static)
     const baseline = Math.floor(height / 2);
-    ctx.fillStyle = '#00FF00';
+    ctx.fillStyle = LINE_COLORS[0];
     ctx.fillRect(-width, baseline, width * 3, 1);
     //Red line (moving)
-    ctx.fillStyle = '#FF0000';
+    ctx.fillStyle = LINE_COLORS[1];
     ctx.fillRect(-width, baseline - args.gap, width * 3, 1);
     //Stats
     ctx.restore();
