@@ -1,6 +1,6 @@
 const CREDIT_CARD_MM = 53.975;
 const PARAM_APPLY_DELAY_MS = 1000;
-const LINE_COLORS = ['#00FF000', '#FF0000'];
+const LINE_COLORS = ['#00FF00', '#FF0000'];
 
 var testingArea = document.getElementById('testing_area').getContext('2d');
 testingArea.previousTouch = null;
